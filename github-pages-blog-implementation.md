@@ -2,7 +2,7 @@
 
 ## 상태
 
-- 배포 작업 진행 중
+- 완료
 
 ## 구현 목표
 
@@ -22,7 +22,8 @@
 - Vitest 테스트, ESLint, Next build 검증 수행
 - 검증 통과 후 `main` 병합 준비
 - GitHub Pages 배포용 워크플로 추가
-- 리모트 저장소 생성 및 연결 진행
+- 리모트 저장소 생성 및 연결 완료
+- GitHub Pages 배포 성공 확인
 
 ## 구현 내용
 
@@ -39,15 +40,17 @@
 - `bun run test` 통과
 - `bun run lint` 통과
 - `bun run build` 통과
-- GitHub Pages 배포 대기
+- GitHub Actions Pages 배포 성공
+- 배포 URL: `https://dambyworld.github.io/`
 
 ## 병합 결과
 
 - 작업 브랜치 `codex/github-pages-blog-plan`에서 구현 완료
 - 검증 통과 후 `main` 브랜치로 병합 완료
+- 이후 Pages 배포 설정과 워크플로 반영을 `main`에서 후속 완료
 
 ## 결과 요약
 
 - GitHub Pages 배포를 전제로 한 Next.js 정적 블로그 기본 구현을 완료했다.
 - slug 중심 URL, Markdown 기반 콘텐츠 관리, 섹션형 정보 구조가 코드로 반영됐다.
-- 배포 전 남은 일은 저장소 공개 설정, GitHub Actions 워크플로, Pages 연결이다.
+- 원격 저장소 `dambyworld/dambyworld.github.io` 생성, 연결, 배포까지 완료했다.
