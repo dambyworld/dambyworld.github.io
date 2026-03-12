@@ -2,7 +2,7 @@
 
 ## 상태
 
-- 완료 및 `main` 병합 반영
+- 배포 작업 진행 중
 
 ## 구현 목표
 
@@ -21,6 +21,8 @@
 - 태그/카테고리 목록과 상세 페이지 구현
 - Vitest 테스트, ESLint, Next build 검증 수행
 - 검증 통과 후 `main` 병합 준비
+- GitHub Pages 배포용 워크플로 추가
+- 리모트 저장소 생성 및 연결 진행
 
 ## 구현 내용
 
@@ -37,6 +39,7 @@
 - `bun run test` 통과
 - `bun run lint` 통과
 - `bun run build` 통과
+- GitHub Pages 배포 대기
 
 ## 병합 결과
 
