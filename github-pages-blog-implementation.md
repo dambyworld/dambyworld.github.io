@@ -2,7 +2,7 @@
 
 ## 상태
 
-- 완료
+- 완료 및 `main` 병합 반영
 
 ## 구현 목표
 
@@ -37,6 +37,11 @@
 - `bun run test` 통과
 - `bun run lint` 통과
 - `bun run build` 통과
+
+## 병합 결과
+
+- 작업 브랜치 `codex/github-pages-blog-plan`에서 구현 완료
+- 검증 통과 후 `main` 브랜치로 병합 완료
 
 ## 결과 요약
 
