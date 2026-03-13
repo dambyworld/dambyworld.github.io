@@ -31,4 +31,8 @@ describe("content collections", () => {
     expect(featured.review?.slug).toBeTruthy();
     expect(getAllPosts().length).toBeGreaterThanOrEqual(6);
   });
+
+  it("supports top-level section directories for future content drops", () => {
+    expect(() => getPostsBySection("tweet")).not.toThrow();
+  });
 });

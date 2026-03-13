@@ -25,15 +25,16 @@ export type Post = PostMeta & {
 };
 
 const contentRoot = path.join(process.cwd(), "src", "content");
+const legacyContentRoots = [path.join(process.cwd())];
 
-function getSectionDir(section: Section) {
-  return path.join(contentRoot, section);
+function getSectionDirs(section: Section) {
+  return [path.join(contentRoot, section), ...legacyContentRoots.map((root) => path.join(root, section))];
 }
 
-function readPostFile(section: Section, slug: string): Post {
-  const fullPath = path.join(getSectionDir(section), `${slug}.md`);
+function readPostFile(section: Section, fullPath: string): Post {
   const fileContent = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContent);
+  const slug = path.basename(fullPath, ".md");
 
   return {
     slug,
@@ -51,15 +52,21 @@ function readPostFile(section: Section, slug: string): Post {
 }
 
 export function getPostsBySection(section: Section): Post[] {
-  const dir = getSectionDir(section);
-  if (!fs.existsSync(dir)) {
-    return [];
+  const filesBySlug = new Map<string, string>();
+
+  for (const dir of getSectionDirs(section)) {
+    if (!fs.existsSync(dir)) {
+      continue;
+    }
+
+    const files = fs.readdirSync(dir).filter((file) => file.endsWith(".md"));
+    for (const file of files) {
+      filesBySlug.set(file.replace(/\.md$/, ""), path.join(dir, file));
+    }
   }
 
-  return fs
-    .readdirSync(dir)
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => readPostFile(section, file.replace(/\.md$/, "")))
+  return [...filesBySlug.values()]
+    .map((fullPath) => readPostFile(section, fullPath))
     .filter((post) => post.published)
     .sort((left, right) => right.date.localeCompare(left.date));
 }
