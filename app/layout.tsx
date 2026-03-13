@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DevAgentation } from "@/components/dev-agentation";
 import "./globals.css";
 
 const navItems = [
@@ -55,6 +56,7 @@ export default function RootLayout({
             <p>Built for GitHub Pages with static export, App Router, and Markdown content.</p>
           </footer>
         </div>
+        <DevAgentation />
       </body>
     </html>
   );
