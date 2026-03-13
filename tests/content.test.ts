@@ -35,4 +35,12 @@ describe("content collections", () => {
   it("supports top-level section directories for future content drops", () => {
     expect(() => getPostsBySection("tweet")).not.toThrow();
   });
+
+  it("derives fallback metadata for body-only tweet notes", () => {
+    const note = getPostsBySection("tweet").find((post) => post.slug === "3-13");
+    expect(note).toBeDefined();
+    expect(note?.title).toContain("안녕 세상");
+    expect(note?.published).toBe(true);
+    expect(note?.category).toBe("tweet");
+  });
 });

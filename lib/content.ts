@@ -35,20 +35,66 @@ function readPostFile(section: Section, fullPath: string): Post {
   const fileContent = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContent);
   const slug = path.basename(fullPath, ".md");
+  const fallbackDate = inferDateFromSlug(slug) ?? new Date().toISOString().slice(0, 10);
+  const fallbackTitle = inferTitle(content, slug);
+  const fallbackDescription = inferDescription(content, fallbackTitle);
 
   return {
     slug,
     section,
     content,
-    title: String(data.title),
-    date: String(data.date),
-    description: String(data.description),
+    title: typeof data.title === "string" && data.title.trim() ? data.title : fallbackTitle,
+    date: typeof data.date === "string" && data.date.trim() ? data.date : fallbackDate,
+    description:
+      typeof data.description === "string" && data.description.trim()
+        ? data.description
+        : fallbackDescription,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-    category: String(data.category),
-    published: Boolean(data.published),
+    category:
+      typeof data.category === "string" && data.category.trim() ? data.category : section,
+    published: typeof data.published === "boolean" ? data.published : true,
     language: (data.language as PostMeta["language"]) ?? "ko",
     hero: data.hero ? String(data.hero) : undefined
   };
+}
+
+function inferDateFromSlug(slug: string) {
+  const isoMatch = slug.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoMatch) {
+    return `${isoMatch[1]}-${isoMatch[2]}-${isoMatch[3]}`;
+  }
+
+  const monthDayMatch = slug.match(/^(\d{1,2})-(\d{1,2})$/);
+  if (!monthDayMatch) {
+    return undefined;
+  }
+
+  const year = new Date().getFullYear();
+  const month = monthDayMatch[1].padStart(2, "0");
+  const day = monthDayMatch[2].padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function inferTitle(content: string, slug: string) {
+  const firstLine = content
+    .split("\n")
+    .map((line) => line.replace(/^#+\s*/, "").trim())
+    .find(Boolean);
+
+  if (firstLine) {
+    return firstLine.slice(0, 80);
+  }
+
+  return slug;
+}
+
+function inferDescription(content: string, title: string) {
+  const normalized = content.replace(/\s+/g, " ").trim();
+  if (!normalized) {
+    return title;
+  }
+
+  return normalized.slice(0, 140);
 }
 
 export function getPostsBySection(section: Section): Post[] {
