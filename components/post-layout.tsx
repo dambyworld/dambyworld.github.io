@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { formatDate, type Post } from "@/lib/content";
+import Link from "next/link"
+import { formatDate, type Post } from "@/lib/content"
 
 type PostLayoutProps = {
-  post: Post;
-  html: string;
-};
+  post: Post
+  html: string
+}
 
 export function PostLayout({ post, html }: PostLayoutProps) {
   return (
@@ -47,5 +47,5 @@ export function PostLayout({ post, html }: PostLayoutProps) {
         </ul>
       </aside>
     </div>
-  );
+  )
 }

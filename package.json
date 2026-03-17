@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "test": "vitest run",
     "clean": "rimraf .next out"
   },
@@ -22,11 +24,12 @@
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "agentation": "^2.3.2",
     "eslint": "^9.39.4",
     "eslint-config-next": "^15.5.12",
-    "typescript": "^5.9.3",
-    "agentation": "^2.3.2",
+    "prettier": "^3.8.1",
     "rimraf": "^6.0.1",
+    "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
   "//packageManager": "Corepack은 bun을 지원하지 않으므로 이 필드는 강제력 없음. 실질적 버전 고정은 .bun-version 파일이 담당 (oven-sh/setup-bun 등 CI 환경에서 사용)",

@@ -9,8 +9,8 @@ const Agentation = dynamic(
   () => import("agentation").then((module) => module.Agentation),
   {
     // 서버에서는 렌더링하지 않고 클라이언트에서만 렌더링해요
-    ssr: false
-  }
+    ssr: false,
+  },
 )
 
 /**

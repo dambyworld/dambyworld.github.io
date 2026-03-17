@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { getTagMap } from "@/lib/content";
+import Link from "next/link"
+import { getTagMap } from "@/lib/content"
 
 export default function TagsPage() {
-  const tagMap = [...getTagMap().entries()];
+  const tagMap = [...getTagMap().entries()]
 
   return (
     <section className="content-card fade-in" style={{ marginTop: 28 }}>
@@ -16,5 +16,5 @@ export default function TagsPage() {
         ))}
       </div>
     </section>
-  );
+  )
 }

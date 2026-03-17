@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { formatDate, type Post } from "@/lib/content";
+import Link from "next/link"
+import { formatDate, type Post } from "@/lib/content"
 
 type PostCardProps = {
-  post: Post;
-};
+  post: Post
+}
 
 export function PostCard({ post }: PostCardProps) {
   return (
@@ -26,5 +26,5 @@ export function PostCard({ post }: PostCardProps) {
         ))}
       </div>
     </article>
-  );
+  )
 }

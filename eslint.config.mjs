@@ -1,16 +1,16 @@
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js"
+import { FlatCompat } from "@eslint/eslintrc"
 
 const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
-  baseDirectory: import.meta.dirname
-});
+  baseDirectory: import.meta.dirname,
+})
 
 const config = [
   {
-    ignores: ["out/**", ".next/**", "node_modules/**"]
+    ignores: ["out/**", ".next/**", "node_modules/**"],
   },
-  ...compat.extends("next/core-web-vitals")
-];
+  ...compat.extends("next/core-web-vitals"),
+]
 
-export default config;
+export default config
